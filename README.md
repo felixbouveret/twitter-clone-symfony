@@ -4,14 +4,22 @@
 
 > Names of contributors
 
-- Benoit Lamonica
-- Estelle Denage
-- Felix Bouveret
-- Bastien Rigaud
+- Benoit Lamonica ([profile](https://github.com/benoitlamonica))
+- Estelle Denage ([profile](https://github.com/Estelle-dng))
+- Felix Bouveret ([profile](https://github.com/felixbouveret))
+- Bastien Rigaud ([profile](https://github.com/Teyz))
 
 ## How to install the project
 
+Build assets : 
+`yarn dev`
+
+Run the app :
+`symfony serve`
+
 ## Tools
+- Symfony
+- VueJs
 
 ## Contribute
 
