@@ -10,6 +10,10 @@
 - Bastien Rigaud ([profile](https://github.com/Teyz))
 
 ## How to install the project
+Install dependencies :
+`composer i && yarn`
+or
+`composer i && npm i`
 
 Build assets : 
 `yarn dev`
