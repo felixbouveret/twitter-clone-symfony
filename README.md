@@ -11,15 +11,11 @@
 
 ## How to install the project
 
-Build assets : 
-`yarn dev`
-
 Run the app :
 `symfony serve`
 
 ## Tools
 - Symfony
-- VueJs
 
 ## Contribute
 
