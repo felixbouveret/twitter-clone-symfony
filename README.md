@@ -15,15 +15,11 @@ Install dependencies :
 or
 `composer i && npm i`
 
-Build assets : 
-`yarn dev`
-
 Run the app :
 `symfony serve`
 
 ## Tools
 - Symfony
-- VueJs
 
 ## Contribute
 
