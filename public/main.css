@@ -1,0 +1,67 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.loginPage {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+}
+
+.loginForm {
+  border: solid 2px rgb(47, 51, 54);
+  padding: 24px;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.inputContainer {
+  margin-top: 32px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.input input {
+  border: solid 2px rgb(47, 51, 54);
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  margin-top: 8px;
+  border-radius: 4px;
+  transition-property: border-color;
+  transition-duration: 0.3s;
+}
+
+.input input:focus {
+  border-color: rgb(29, 161, 242);
+  outline: none;
+}
+
+.btn-primary {
+  background-color: rgb(29, 161, 242);
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.btn-primary:focus {
+  outline: none;
+  background-color: rgb(28, 136, 204);
+}
