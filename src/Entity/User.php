@@ -42,9 +42,33 @@ class User implements UserInterface
      */
     private $tweets;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tweets::class, inversedBy="retweeters")
+     */
+    private $retweet;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tweets::class, mappedBy="likes")
+     */
+    private $likes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="followed")
+     */
+    private $followers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="followers")
+     */
+    private $followed;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
+        $this->retweet = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->followed = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,6 +174,108 @@ class User implements UserInterface
             if ($tweet->getIdUser() === $this) {
                 $tweet->setIdUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tweets[]
+     */
+    public function getRetweet(): Collection
+    {
+        return $this->retweet;
+    }
+
+    public function addRetweet(Tweets $retweet): self
+    {
+        if (!$this->retweet->contains($retweet)) {
+            $this->retweet[] = $retweet;
+        }
+
+        return $this;
+    }
+
+    public function removeRetweet(Tweets $retweet): self
+    {
+        $this->retweet->removeElement($retweet);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tweets[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Tweets $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->addLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Tweets $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            $like->removeLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        $this->followers->removeElement($follower);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollowed(): Collection
+    {
+        return $this->followed;
+    }
+
+    public function addFollowed(self $followed): self
+    {
+        if (!$this->followed->contains($followed)) {
+            $this->followed[] = $followed;
+            $followed->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowed(self $followed): self
+    {
+        if ($this->followed->removeElement($followed)) {
+            $followed->removeFollower($this);
         }
 
         return $this;
