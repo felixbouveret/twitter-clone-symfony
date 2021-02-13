@@ -29,7 +29,7 @@ class HomeController extends AbstractController
      /**
      * @Route("/create", name="create")
      */
-    public function createAction(Request $request)
+    public function createTweet(Request $request)
     {
         $tweet = new Tweets();
         $form = $this->createForm(TweetType::class, $tweet);
@@ -43,6 +43,35 @@ class HomeController extends AbstractController
             // TODO Set the current user
             $user = $this->getUser();
             $tweet->setIdUser($user);
+            $tweet->setDate(new \DateTime('now'));
+
+            $em->persist($tweet);
+            $em->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('home/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/answer/{id}", name="answer")
+     */
+    public function answerTweet(Request $request, Tweets $id)
+    {
+        $tweet = new Tweets();
+        $form = $this->createForm(TweetType::class, $tweet);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            // TODO Set the current user
+            $user = $this->getUser();
+            $tweet->setIdUser($user);
+            $tweet->setIdParentTweet($id);
             $tweet->setDate(new \DateTime('now'));
 
             $em->persist($tweet);
