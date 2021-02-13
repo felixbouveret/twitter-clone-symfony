@@ -4,7 +4,12 @@
 
 {% block body %}
 
-<div id="app">
-    <app></app>
-</div>
+<h1>Tweets</h1>
+
+<ul>
+    {% for tweet in tweets %}
+        <li>{{ tweet.content }}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
