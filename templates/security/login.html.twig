@@ -5,15 +5,14 @@
 
 {% block body %}
 	<section class="loginPage">
-		<form method="post" class="loginForm">
-			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
+		<form method="post" class="form">
 
 			{% if app.user %}
-				<div class="mb-3">
-					You are logged in as
-					{{ app.user.username }},
+				<div class="mb-3 alreadyConnected">
+					You are logged in with
+					<span>
+						{{ app.user.username }},
+					</span>
 					<a href="{{ path('app_logout') }}">Logout</a>
 				</div>
 			{% endif %}
@@ -32,6 +31,10 @@
 			</div>
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
 			<button class="btn btn-lg btn-primary" type="submit">
 				Sign in

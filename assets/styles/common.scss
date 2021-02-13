@@ -1,0 +1,26 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.loginPage,
+.registerPage {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+}
+
+.form {
+  border: solid 2px $gray;
+  padding: 24px;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  border-radius: 8px;
+}
