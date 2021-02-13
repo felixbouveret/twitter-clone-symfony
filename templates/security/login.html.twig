@@ -13,7 +13,7 @@
 					<span>
 						{{ app.user.username }},
 					</span>
-					<a href="{{ path('app_logout') }}">Logout</a>
+					<a href="{{ path('app_logout') }}" class="link">Logout</a>
 				</div>
 			{% endif %}
 
@@ -39,6 +39,7 @@
 			<button class="btn btn-lg btn-primary" type="submit">
 				Sign in
 			</button>
+			<a href="/register" class="link toRegister">Or register</a>
 		</form>
 	</section>
 {% endblock %}

@@ -24,3 +24,12 @@ h1 {
   margin: auto;
   border-radius: 8px;
 }
+
+.link {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
