@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}App{% endblock %}
+{% block title %}Twitter{% endblock %}
 
 {% block body %}
 
 <h1>Tweets</h1>
 
+
 <ul>
     {% for tweet in tweets %}
         <li>
-            <div>
+            <div class="single-tweet">
                 <p>{{ tweet.content }}</p>
+                <span class="date">{{ tweet.date|date("F jS") }}</span>
                 <span class="author"></span>
+                <a href="{{ path('deleteTweet', {'id': tweet.id }) }}">Delete</a>
             </div>
         </li>
     {% endfor %}

@@ -269,4 +269,15 @@ h1 {
   margin-left: 8px;
 }
 
+.single-tweet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 32px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
 /*# sourceMappingURL=main.css.map */
