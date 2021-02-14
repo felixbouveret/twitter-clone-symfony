@@ -36,7 +36,7 @@ class Tweets
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity=Tweets::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Tweets::class)
      */
     private $id_parent_tweet;
 
