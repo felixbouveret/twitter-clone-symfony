@@ -8,7 +8,12 @@
 
 <ul>
     {% for tweet in tweets %}
-        <li>{{ tweet.content }}</li>
+        <li>
+            <div>
+                <p>{{ tweet.content }}</p>
+                <span class="author"></span>
+            </div>
+        </li>
     {% endfor %}
 </ul>
 

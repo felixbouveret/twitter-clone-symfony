@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Entity\Tweets;
 use App\Form\TweetType;
@@ -52,6 +54,19 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/tweet/{id}", name="deleteTweet")
+     */
+    public function deleteTweet($id, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Tweets::class);
+        $tweet = $repository->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($tweet);
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
     }
 
     /**
