@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/create", name="create")
      */
     public function createTweet(Request $request)
@@ -38,8 +38,7 @@ class HomeController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             // TODO Set the current user
@@ -80,8 +79,7 @@ class HomeController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             // TODO Set the current user
@@ -97,5 +95,14 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/create.html.twig', ['form' => $form->createView()]);
+    }
+    /**
+     * @Route("/like/{id}", name="answerTweet")
+     */
+    public function likeTweet($id)
+    {
+        $user = $this->getUser();
+        $theTweet = $this->getDoctrine()->getRepository(Tweets::class)->find($id);
+        $theTweet->addLike;
     }
 }

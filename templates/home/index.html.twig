@@ -1,34 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Twitter{% endblock %}
+{% block title %}Twitter
+{% endblock %}
 
 {% block body %}
 
-<h1>Tweets</h1>
+	<h1>Tweets</h1>
 
 
-<ul>
-    {% for tweet in tweets %}
-        <li>
-           {% if (tweet.isActivated) %} 
-                <div class="single-tweet">
-                    <p>{{ tweet.content }}</p>
-                    <span class="date">{{ tweet.date|date("F jS") }}</span>
-                    <span class="author"></span>
-                    <a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-primary">Delete</a>
-                    <a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
-                </div>
-            {% else %}
-                 <div class="single-tweet isNotActivated">
-                    <p>{{ tweet.content }}</p>
-                    <span class="date">{{ tweet.date|date("F jS") }}</span>
-                    <span class="author"></span>
-                    <a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-primary">Delete</a>
-                    <a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
-                </div>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
-
+	<ul>
+		{% for tweet in tweets %}
+			<li>
+				<div class={{ tweet.isActivated ? "single-tweet" : "single-tweet isNotActivated"}}>
+					<p>{{ tweet.content }}</p>
+					<span class="date">{{ tweet.date|date("F jS") }}</span>
+					<span class="author"></span>
+					<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-primary">Delete</a>
+					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}
