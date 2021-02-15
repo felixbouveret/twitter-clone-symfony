@@ -113,4 +113,20 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+    /**
+     * @Route("/dislike/{id}", name="dislikeTweet")
+     */
+    public function dislikeTweet($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+        $theTweet = $this->getDoctrine()->getRepository(Tweets::class)->find($id);
+        $theTweet->removeLike($user);
+
+        $em->persist($theTweet);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }

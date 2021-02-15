@@ -5,30 +5,25 @@
 
 {% block body %}
 
-	<h1>Tweets</h1>
+<h1>Tweets</h1>
 
+<ul>
+	{% for tweet in tweets %}
+		<li>
+			<div {{ tweet.isActivated ? "class='single-tweet'" : "class='single-tweet isNotActivated'"}}>
+				<p>{{ tweet.content }}</p>
+				<span class="date">{{ tweet.date|date("F jS") }}</span>
+				<span class="author"></span>
+				{% if app.user.id is same as tweet.user.id %}
+					<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
+				{% endif %}
+				<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 
-	<ul>
-		{% for tweet in tweets %}
-			<li>
-				<div {{ tweet.isActivated ? "class='single-tweet'" : "class='single-tweet isNotActivated'"}}>
-					<p>{{ tweet.content }}</p>
-					<span class="date">{{ tweet.date|date("F jS") }}</span>
-					<span class="author"></span>
-					{% if app.user.id is same as tweet.user.id %}
-						<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
-					{% endif %}
-					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
-					{% if tweet.id in app.user.likes %}
-						<a href="{{ path('likeTweet', {'id': tweet.id }) }}" class={{"btn-primary liked"}}>Like ({{tweet.likes|length}})</a>
-					{% else %}
-						<a href="{{ path('likeTweet', {'id': tweet.id }) }}" class={{"btn-primary"}}>Like ({{tweet.likes|length}})</a>
-					{% endif %}
-					{% for like in tweet.likes %}
-						<p>{{like.username}}</p>
-					{% endfor %}
-				</div>
+				<a href="{{ tweet in app.user.likes ? path('dislikeTweet', {'id': tweet.id }) : path('likeTweet', {'id': tweet.id }) }}" {{ tweet in app.user.likes ? "class='btn-primary liked'" : "class='btn-primary'"}}>Like ({{tweet.likes|length}})</a>
+				{% for like in tweet.likes %}
+					<p>{{like.username}}</p>
+				{% endfor %}
 			</li>
-		{% endfor %}
-	</ul>
-{% endblock %}
+		</li>
+	</div>
+</li>{% endfor %}</ul>{% endblock %}
