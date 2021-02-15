@@ -57,11 +57,16 @@ class Tweets
      */
     private $response;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActivated = true;
+
     public function __construct()
     {
         $this->retweeters = new ArrayCollection();
         $this->likes = new ArrayCollection();
-        $this->mainTweet = new ArrayCollection();
+        $this->response = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +198,18 @@ class Tweets
                 $response->setResponse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated(bool $isActivated): self
+    {
+        $this->isActivated = $isActivated;
 
         return $this;
     }

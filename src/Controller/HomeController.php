@@ -44,7 +44,7 @@ class HomeController extends AbstractController
 
             // TODO Set the current user
             $user = $this->getUser();
-            $tweet->setIdUser($user);
+            $tweet->setUser($user);
             $tweet->setDate(new \DateTime('now'));
 
             $em->persist($tweet);
@@ -63,8 +63,9 @@ class HomeController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Tweets::class);
         $tweet = $repository->find($id);
+        $tweet->setIsActivated(false);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($tweet);
+        $entityManager->persist($tweet);
         $entityManager->flush();
         return $this->redirectToRoute('home');
     }
