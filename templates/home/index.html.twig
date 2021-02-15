@@ -19,6 +19,14 @@
 						<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
 					{% endif %}
 					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
+					{% if tweet.id in app.user.likes %}
+						<a href="{{ path('likeTweet', {'id': tweet.id }) }}" class={{"btn-primary liked"}}>Like ({{tweet.likes|length}})</a>
+					{% else %}
+						<a href="{{ path('likeTweet', {'id': tweet.id }) }}" class={{"btn-primary"}}>Like ({{tweet.likes|length}})</a>
+					{% endif %}
+					{% for like in tweet.likes %}
+						<p>{{like.username}}</p>
+					{% endfor %}
 				</div>
 			</li>
 		{% endfor %}

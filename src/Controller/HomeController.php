@@ -22,6 +22,7 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Tweets::class);
 
         $tweets = $repository->findAll();
+        // $likes = $tweets[0]->getLikes()->getValues();
 
         return $this->render('home/index.html.twig', [
             'tweets' => $tweets,
@@ -101,8 +102,15 @@ class HomeController extends AbstractController
      */
     public function likeTweet($id)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $user = $this->getUser();
         $theTweet = $this->getDoctrine()->getRepository(Tweets::class)->find($id);
-        $theTweet->addLike;
+        $theTweet->addLike($user);
+
+        $em->persist($theTweet);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }
