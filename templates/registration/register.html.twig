@@ -12,6 +12,10 @@
 			<div class="inputContainer">
 				{{ form_start(registrationForm) }}
 				<div class="input">
+					{{ form_label(registrationForm.username) }}
+					{{ form_widget(registrationForm.username) }}
+				</div>
+				<div class="input">
 					{{ form_label(registrationForm.email) }}
 					{{ form_widget(registrationForm.email) }}
 				</div>
@@ -31,6 +35,7 @@
 				{{ form_errors(registrationForm.email) }}
 				{{ form_errors(registrationForm.plainPassword) }}
 				{{ form_errors(registrationForm.agreeTerms) }}
+				{{ form_errors(registrationForm.username) }}
 			</div>
 
 			<button type="submit" class="btn btn-primary">Register</button>

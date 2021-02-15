@@ -11,28 +11,13 @@ use App\Entity\Tweets;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/profile/{userName}", name="profile")
      */
-    public function index(): Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Tweets::class);
-        $user = $this->getUser();
-        $tweets = $repository->findBy(["user" => $user]);
-
-        return $this->render('profile/index.html.twig', [
-            'tweets' => $tweets,
-            'user' => $user
-        ]);
-    }
-
-    /**
-     * @Route("/profile/{id}", name="otherUserProfile")
-     */
-    public function otherUser($id): Response
+    public function index($userName): Response
     {
         $repository = $this->getDoctrine()->getRepository(Tweets::class);
         $userRepository = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepository->findOneBy(["id" => $id]);
+        $user = $userRepository->findOneBy(["username" => $userName]);
         $tweets = $repository->findBy(["user" => $user]);
 
         return $this->render('profile/index.html.twig', [
