@@ -23,7 +23,7 @@ class Tweets
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tweets")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_user;
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=245)
@@ -36,11 +36,6 @@ class Tweets
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity=Tweets::class)
-     */
-    private $id_parent_tweet;
-
-    /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="retweet")
      */
     private $retweeters;
@@ -50,10 +45,22 @@ class Tweets
      */
     private $likes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tweets::class, inversedBy="response")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $mainTweet;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tweets::class, mappedBy="mainTweet")
+     */
+    private $response;
+
     public function __construct()
     {
         $this->retweeters = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->mainTweet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,14 +68,14 @@ class Tweets
         return $this->id;
     }
 
-    public function getIdUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser(?User $id_user): self
+    public function setUser(?User $user): self
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }
@@ -96,19 +103,6 @@ class Tweets
 
         return $this;
     }
-
-    public function getIdParentTweet(): ?self
-    {
-        return $this->id_parent_tweet;
-    }
-
-    public function setIdParentTweet(?self $id_parent_tweet): self
-    {
-        $this->id_parent_tweet = $id_parent_tweet;
-
-        return $this;
-    }
-
     /**
      * @return Collection|User[]
      */
@@ -156,6 +150,48 @@ class Tweets
     public function removeLike(User $like): self
     {
         $this->likes->removeElement($like);
+
+        return $this;
+    }
+
+    public function getMainTweet(): ?self
+    {
+        return $this->mainTweet;
+    }
+
+    public function setMainTweet(?self $mainTweet): self
+    {
+        $this->mainTweet = $mainTweet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getResponse(): Collection
+    {
+        return $this->response;
+    }
+
+    public function addResponse(self $response): self
+    {
+        if (!$this->response->contains($response)) {
+            $this->response[] = $response;
+            $response->setResponse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(self $response): self
+    {
+        if ($this->response->removeElement($response)) {
+            // set the owning side to null (unless already changed)
+            if ($response->getResponse() === $this) {
+                $response->setResponse(null);
+            }
+        }
 
         return $this;
     }

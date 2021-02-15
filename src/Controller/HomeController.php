@@ -70,9 +70,9 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/answer/{id}", name="answer")
+     * @Route("/answer/{id}", name="answerTweet")
      */
-    public function answerTweet(Request $request, Tweets $id)
+    public function answerTweet(Request $request, Tweets $mainTweet)
     {
         $tweet = new Tweets();
         $form = $this->createForm(TweetType::class, $tweet);
@@ -85,8 +85,8 @@ class HomeController extends AbstractController
 
             // TODO Set the current user
             $user = $this->getUser();
-            $tweet->setIdUser($user);
-            $tweet->setIdParentTweet($id);
+            $tweet->setUser($user);
+            $tweet->setMainTweet($mainTweet);
             $tweet->setDate(new \DateTime('now'));
 
             $em->persist($tweet);
