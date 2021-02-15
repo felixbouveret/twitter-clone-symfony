@@ -39,6 +39,16 @@
   font-size: 18px;
 }
 
+.btn-danger {
+  background-color: $red;
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
 .btn-primary:focus {
   outline: none;
   background-color: $blue;
