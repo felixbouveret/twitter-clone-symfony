@@ -47,12 +47,13 @@ class Tweets
 
     /**
      * @ORM\ManyToOne(targetEntity=Tweets::class, inversedBy="response")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $mainTweet;
 
     /**
      * @ORM\OneToMany(targetEntity=Tweets::class, mappedBy="mainTweet")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $response;
 
