@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!
+{% endblock %}
+
+{% block body %}
+	<h1>{{user.email}}</h1>
+
+	<ul>
+		{% for tweet in tweets %}
+			<li>
+				<div class="single-tweet">
+					<p>{{ tweet.content }}</p>
+					<span class="date">{{ tweet.date|date("F jS") }}</span>
+					<span class="author"></span>
+					<a href="{{ path('deleteTweet', {'id': tweet.id }) }}">Delete</a>
+					<a href="{{ path('answerTweet', {'id': tweet.id }) }}">Anwser</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

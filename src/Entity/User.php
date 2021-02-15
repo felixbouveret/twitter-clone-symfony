@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -63,6 +64,11 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="followers")
      */
     private $followed;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $username;
 
     public function __construct()
     {
@@ -279,6 +285,13 @@ class User implements UserInterface
         if ($this->followed->removeElement($followed)) {
             $followed->removeFollower($this);
         }
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
