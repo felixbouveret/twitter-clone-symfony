@@ -283,6 +283,12 @@ h1 {
   margin-left: 8px;
 }
 
+.tweetFlow {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .single-tweet {
   display: flex;
   align-items: center;
@@ -295,6 +301,37 @@ h1 {
 }
 .single-tweet.isNotActivated {
   background-color: rgba(255, 0, 0, 0.5);
+}
+.single-tweet .buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.single-tweet .like-button {
+  position: relative;
+}
+.single-tweet .like-button ul {
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 8px;
+  top: 100%;
+  transform: translateY(-4px);
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.2s;
+  border-radius: 4px;
+}
+.single-tweet .like-button ul li {
+  margin-top: 4px;
+}
+.single-tweet .like-button ul li:first-child {
+  margin-top: 0;
+}
+.single-tweet .like-button:hover ul {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /*# sourceMappingURL=main.css.map */
