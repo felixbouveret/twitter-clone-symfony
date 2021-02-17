@@ -34,8 +34,10 @@
 							{% endif %}
 						</a>
 						<a href="/tweetSingle/{{tweet.id}}" class="btn-primary">See Answers</a>
+						<a href="{{ path('retweet', {'id': tweet.id }) }}" class="btn-primary">Retweet</a>
 					</div>
 				</div>
+
 			</li>
 		{% endfor %}
 	</ul>
