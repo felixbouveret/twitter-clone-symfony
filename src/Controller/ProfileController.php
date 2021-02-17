@@ -25,4 +25,38 @@ class ProfileController extends AbstractController
             'user' => $user
         ]);
     }
+
+    /**
+     * @Route("/follow/{userName}", name="follow")
+     */
+    public function follow($userName): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $userRepository = $this->getDoctrine()->getRepository(User::class)->findOneBy(["username" => $userName]);
+        
+        $userRepository->addFollower($user);
+        $em->persist($userRepository);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/unfollow/{userName}", name="unfollow")
+     */
+    public function unfollow($userName): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $userRepository = $this->getDoctrine()->getRepository(User::class)->findOneBy(["username" => $userName]);
+        
+        $userRepository->removeFollower($user);
+        $em->persist($userRepository);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }
