@@ -6,8 +6,7 @@
 {% block body %}
 	<h1>{{user.email}}</h1>
 	{% if (app.user.id) is not same as user.id %}
-		<a href="{{ path('follow', {'userName': user.username }) }}" class="btn-primary">Follow</a>
-		<a href="{{ path('unfollow', {'userName': user.username }) }}" class="btn-danger">Unfollow</a>
+		<a href="{{ app.user in user.followers ? path('unfollow', {'userName': user.username }) : path('follow', {'userName': user.username }) }}" {{ app.user in user.followers ? "class='btn-danger'" : "class='btn-primary'"}}>Follow</a>
 	{% endif %}
 
 	<div class="followersCount">
