@@ -97,7 +97,7 @@ class HomeController extends AbstractController
         return $this->render('home/create.html.twig', ['form' => $form->createView()]);
     }
     /**
-     * @Route("/like/{id}", name="answerTweet")
+     * @Route("/like/{id}", name="likeTweet")
      */
     public function likeTweet($id)
     {

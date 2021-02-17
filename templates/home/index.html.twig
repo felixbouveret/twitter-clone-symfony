@@ -11,13 +11,13 @@
 	<ul>
 		{% for tweet in tweets %}
 			<li>
-				<div class={{ tweet.isActivated ? "single-tweet" : "single-tweet isNotActivated"}}>
+				<div {{ tweet.isActivated ? "class='single-tweet'" : "class='single-tweet isNotActivated'"}}>
 					<p>{{ tweet.content }}</p>
 					<span class="date">{{ tweet.date|date("F jS") }}</span>
 					<span class="author"></span>
-                    {% if app.user.id is same as tweet.user.id %}
-					    <a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
-                    {% endif %}
+					{% if app.user.id is same as tweet.user.id %}
+						<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
+					{% endif %}
 					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 				</div>
 			</li>
