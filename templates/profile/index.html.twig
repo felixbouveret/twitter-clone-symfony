@@ -5,6 +5,15 @@
 
 {% block body %}
 	<h1>{{user.email}}</h1>
+	{% if (app.user.id) is not same as user.id %}
+		<a href="{{ path('follow', {'userName': user.username }) }}" class="btn-primary">Follow</a>
+		<a href="{{ path('unfollow', {'userName': user.username }) }}" class="btn-danger">Unfollow</a>
+	{% endif %}
+
+	<div class="followersCount">
+			<p>Followers : {{user.followers|length}}</p>
+			<p>Followed : {{user.followed|length}}</p>
+	</div>
 
 	<ul>
 		{% for tweet in tweets %}
@@ -13,8 +22,10 @@
 					<p>{{ tweet.content }}</p>
 					<span class="date">{{ tweet.date|date("F jS") }}</span>
 					<span class="author"></span>
-					<a href="{{ path('deleteTweet', {'id': tweet.id }) }}">Delete</a>
-					<a href="{{ path('answerTweet', {'id': tweet.id }) }}">Anwser</a>
+					{% if app.user.id is same as tweet.user.id %}
+						<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
+					{% endif %}
+					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 				</div>
 			</li>
 		{% endfor %}
