@@ -21,11 +21,20 @@ class HomeController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Tweets::class);
 
-        $tweets = $repository->findAll();
-        // $likes = $tweets[0]->getLikes()->getValues();
+        $currentUser = $this->getUser();
+        $followed = $currentUser->getFollowed();
+        $followedTweets = [];
+
+        foreach ($followed as $key => $follower) {
+            array_push($followedTweets, $repository->findBy(["user" => $follower, 'isActivated' => true, "mainTweet" => null]));
+        }
+
+        $mergeFollowedTweets = array_merge(...$followedTweets);
+
+        // dd($mergeFollowedTweets);
 
         return $this->render('home/index.html.twig', [
-            'tweets' => $tweets,
+            'tweets' => $mergeFollowedTweets,
         ]);
     }
 
