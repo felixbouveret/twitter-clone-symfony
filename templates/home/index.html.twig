@@ -34,10 +34,14 @@
 							{% endif %}
 						</a>
 						<a href="/tweetSingle/{{tweet.id}}" class="btn-primary">See Answers</a>
-						<a href="{{ path('retweet', {'id': tweet.id }) }}" class="btn-primary">Retweet</a>
+						<a href="{{ tweet in app.user.retweet ? path('deleteRetweet', {'id': tweet.id }) : path('retweet', {'id': tweet.id }) }}" class="btn-primary {% if tweet in app.user.retweet %}btn-danger{% endif %}">
+							{{ tweet in app.user.retweet ? 'Cancel retweet' : 'Retweet' }}
+						</a>
+						{% for retweet in tweet.retweeters %}
+							<p>{{retweet.username}}</p>
+						{% endfor %}
 					</div>
 				</div>
-
 			</li>
 		{% endfor %}
 	</ul>

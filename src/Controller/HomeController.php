@@ -140,7 +140,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/deleteRetweet/{id}", name="deleteRetweet")
      */
-    /*public function deleteRetweet($id)
+    public function deleteRetweet($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -151,7 +151,7 @@ class HomeController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('home');
-    }*/
+    }
     /**
      * @Route("/dislike/{id}", name="dislikeTweet")
      */
