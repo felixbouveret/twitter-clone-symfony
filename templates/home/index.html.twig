@@ -22,7 +22,7 @@
 						<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 
 						<a href="{{ tweet in app.user.likes ? path('dislikeTweet', {'id': tweet.id }) : path('likeTweet', {'id': tweet.id }) }}" {{ tweet in app.user.likes ? "class='btn-primary like-button liked'" : "class='btn-primary like-button'"}}>
-							<p>Like ({{tweet.likes|length}})</p>
+							Like ({{tweet.likes|length}})
 							{% if not (tweet.likes is empty) %}
 								<ul>
 									{% for like in tweet.likes %}

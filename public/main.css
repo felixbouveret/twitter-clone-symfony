@@ -302,7 +302,6 @@ h1 {
 .single-tweet.isNotActivated {
   background-color: rgba(255, 0, 0, 0.5);
 }
-<<<<<<< HEAD
 .single-tweet .buttonsContainer {
   display: flex;
   justify-content: flex-end;
@@ -334,7 +333,5 @@ h1 {
   transform: translateY(0);
   opacity: 1;
 }
-=======
->>>>>>> retweet
 
 /*# sourceMappingURL=main.css.map */
