@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!
+{% endblock %}
+
+{% block body %}
+	<h1>{{user.email}}</h1>
+	{% if (app.user.id) is not same as user.id %}
+		<a href="{{ app.user in user.followers ? path('unfollow', {'userName': user.username }) : path('follow', {'userName': user.username }) }}" {{ app.user in user.followers ? "class='btn-danger'" : "class='btn-primary'"}}>Follow</a>
+	{% endif %}
+
+	<div class="followersCount">
+			<p>Followers : {{user.followers|length}}</p>
+			<p>Followed : {{user.followed|length}}</p>
+	</div>
+
+	<ul>
+		{% for tweet in tweets %}
+			<li>
+				<div class="single-tweet">
+					<p>{{ tweet.content }}</p>
+					<span class="date">{{ tweet.date|date("F jS") }}</span>
+					<span class="author"></span>
+					{% if app.user.id is same as tweet.user.id %}
+						<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
+					{% endif %}
+					<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

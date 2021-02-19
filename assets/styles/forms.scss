@@ -1,0 +1,99 @@
+.inputContainer {
+  margin-top: 32px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+
+  &:hover input {
+    border-color: $light-gray;
+  }
+
+  input:focus {
+    border-color: $blue;
+    outline: none;
+  }
+}
+
+.input input {
+  border: solid 2px $gray;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  margin-top: 8px;
+  border-radius: 4px;
+  transition-property: border-color;
+  transition-duration: 0.3s;
+}
+
+.btn-primary {
+  background-color: $blue;
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.btn-danger {
+  background-color: $red;
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.btn-primary:focus {
+  outline: none;
+  background-color: $blue;
+}
+
+.checkbox {
+  margin-top: 16px;
+  position: relative;
+
+  label {
+    padding-left: 32px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: solid 2px $gray;
+      transform: translate(0, -50%);
+      top: 50%;
+      left: 0;
+
+      transition-property: border-color;
+      transition-duration: 0.3s;
+    }
+
+    &:hover::before {
+      border-color: $light-gray;
+    }
+  }
+
+  input {
+    display: none;
+    &:checked ~ label:before {
+      background-color: $blue;
+      background-image: url("icons/check.svg");
+    }
+  }
+}
+
+.alert {
+  margin-top: 8px;
+}
+
+.alert-danger {
+  color: rgb(224, 36, 94);
+}

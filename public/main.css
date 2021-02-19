@@ -1,0 +1,337 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.loginPage,
+.registerPage {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+}
+
+.form {
+  border: solid 2px #2f3336;
+  padding: 24px;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.link {
+  color: #1c88cc;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.inputContainer {
+  margin-top: 32px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+.input:hover input {
+  border-color: #404447;
+}
+.input input:focus {
+  border-color: #1c88cc;
+  outline: none;
+}
+
+.input input {
+  border: solid 2px #2f3336;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  margin-top: 8px;
+  border-radius: 4px;
+  transition-property: border-color;
+  transition-duration: 0.3s;
+}
+
+.btn-primary {
+  background-color: #1c88cc;
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.btn-danger {
+  background-color: #e0245e;
+  border: 0;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.btn-primary:focus {
+  outline: none;
+  background-color: #1c88cc;
+}
+
+.checkbox {
+  margin-top: 16px;
+  position: relative;
+}
+.checkbox label {
+  padding-left: 32px;
+}
+.checkbox label::before {
+  position: absolute;
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: solid 2px #2f3336;
+  transform: translate(0, -50%);
+  top: 50%;
+  left: 0;
+  transition-property: border-color;
+  transition-duration: 0.3s;
+}
+.checkbox label:hover::before {
+  border-color: #404447;
+}
+.checkbox input {
+  display: none;
+}
+.checkbox input:checked ~ label:before {
+  background-color: #1c88cc;
+  background-image: url("icons/check.svg");
+}
+
+.alert {
+  margin-top: 8px;
+}
+
+.alert-danger {
+  color: #e0245e;
+}
+
+.alreadyConnected {
+  margin-bottom: 16px;
+}
+.alreadyConnected span {
+  font-weight: 700;
+}
+.alreadyConnected a {
+  color: #1c88cc;
+}
+
+.toRegister {
+  margin-left: 8px;
+}
+
+.toLogin {
+  margin-left: 8px;
+}
+
+.tweetFlow {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.single-tweet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 32px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+.single-tweet.isNotActivated {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.single-tweet .buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.single-tweet .like-button {
+  position: relative;
+}
+.single-tweet .like-button ul {
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 8px;
+  top: 100%;
+  transform: translateY(-4px);
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.2s;
+  border-radius: 4px;
+}
+.single-tweet .like-button ul li {
+  margin-top: 4px;
+}
+.single-tweet .like-button ul li:first-child {
+  margin-top: 0;
+}
+.single-tweet .like-button:hover ul {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/*# sourceMappingURL=main.css.map */

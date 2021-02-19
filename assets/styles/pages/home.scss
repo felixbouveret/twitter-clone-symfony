@@ -1,0 +1,59 @@
+.tweetFlow {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.single-tweet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 32px;
+
+  color: white;
+
+  border: 1px solid white;
+  border-radius: 2px;
+
+  &.isNotActivated {
+    background-color: rgba(red, 0.5);
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .like-button {
+    position: relative;
+
+    ul {
+      position: absolute;
+      background-color: black;
+      color: white;
+      font-size: 12px;
+      padding: 8px;
+      top: 100%;
+      transform: translateY(-4px);
+      opacity: 0;
+      transition-property: opacity, transform;
+      transition-duration: 0.2s;
+      border-radius: 4px;
+
+      li {
+        margin-top: 4px;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &:hover ul {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}

@@ -1,14 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Twitter
+{% block title %}Hello TweetController!
 {% endblock %}
 
 {% block body %}
 
-	<h1>Home</h1>
+	<div {{ tweet.isActivated ? "class='single-tweet'" : "class='single-tweet isNotActivated'"}}>
+		<a href="/profile/{{tweet.user.username}}" class="author">{{tweet.user.username}}</a>
+		<p>{{ tweet.content }}</p>
+		<span class="date">{{ tweet.date|date("F jS") }}</span>
+		<div class="buttonsContainer">
+			{% if app.user.id is same as tweet.user.id %}
+				<a href="{{ path('deleteTweet', {'id': tweet.id }) }}" class="btn-danger">Delete</a>
+			{% endif %}
+			<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 
-	<ul class="tweetFlow">
-		{% for tweet in tweets %}
+			<a href="{{ tweet in app.user.likes ? path('dislikeTweet', {'id': tweet.id }) : path('likeTweet', {'id': tweet.id }) }}" {{ tweet in app.user.likes ? "class='btn-primary like-button liked'" : "class='btn-primary like-button'"}}>
+				<p>Like ({{tweet.likes|length}})</p>
+				{% if not (tweet.likes is empty) %}
+					<ul>
+						{% for like in tweet.likes %}
+							<li>
+								{{like.username}}
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</a>
+
+		</div>
+	</div>
+	<ul>
+		{% for tweet in responses %}
 			<li>
 				<div {{ tweet.isActivated ? 'class="single-tweet"' : 'class="single-tweet isNotActivated"'}}>
 					<a href="/profile/{{tweet.user.username}}" class="author">{{tweet.user.username}}</a>
@@ -22,7 +45,7 @@
 						<a href="{{ path('answerTweet', {'id': tweet.id }) }}" class="btn-primary">Anwser</a>
 
 						<a href="{{ tweet in app.user.likes ? path('dislikeTweet', {'id': tweet.id }) : path('likeTweet', {'id': tweet.id }) }}" {{ tweet in app.user.likes ? "class='btn-primary like-button liked'" : "class='btn-primary like-button'"}}>
-							Like ({{tweet.likes|length}})
+							<p>Like ({{tweet.likes|length}})</p>
 							{% if not (tweet.likes is empty) %}
 								<ul>
 									{% for like in tweet.likes %}
@@ -34,12 +57,6 @@
 							{% endif %}
 						</a>
 						<a href="/tweetSingle/{{tweet.id}}" class="btn-primary">See Answers</a>
-						<a href="{{ tweet in app.user.retweet ? path('deleteRetweet', {'id': tweet.id }) : path('retweet', {'id': tweet.id }) }}" class="btn-primary {% if tweet in app.user.retweet %}btn-danger{% endif %}">
-							{{ tweet in app.user.retweet ? 'Cancel retweet' : 'Retweet' }}
-						</a>
-						{% for retweet in tweet.retweeters %}
-							<p>{{retweet.username}}</p>
-						{% endfor %}
 					</div>
 				</div>
 			</li>

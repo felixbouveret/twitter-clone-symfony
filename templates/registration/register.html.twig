@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	<section class="registerPage">
+		<div class="form">
+
+
+			<h1>Register</h1>
+			<div class="inputContainer">
+				{{ form_start(registrationForm) }}
+				<div class="input">
+					{{ form_label(registrationForm.username) }}
+					{{ form_widget(registrationForm.username) }}
+				</div>
+				<div class="input">
+					{{ form_label(registrationForm.email) }}
+					{{ form_widget(registrationForm.email) }}
+				</div>
+				<div class="input">
+					{{ form_label(registrationForm.plainPassword, 'Password') }}
+					{{ form_widget(registrationForm.plainPassword) }}
+				</div>
+				<div class="checkbox">
+					{{ form_widget(registrationForm.agreeTerms) }}
+					{{ form_label(registrationForm.agreeTerms, 'Agree terms') }}
+				</div>
+			</div>
+			{% for flashError in app.flashes('verify_email_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
+			<div class="alert alert-danger">
+				{{ form_errors(registrationForm.email) }}
+				{{ form_errors(registrationForm.plainPassword) }}
+				{{ form_errors(registrationForm.agreeTerms) }}
+				{{ form_errors(registrationForm.username) }}
+			</div>
+
+			<button type="submit" class="btn btn-primary">Register</button>
+			<a href="/login" class="link toLogin">Or login</a>
+
+			{{ form_end(registrationForm) }}
+		</div>
+	</section>
+{% endblock %}
