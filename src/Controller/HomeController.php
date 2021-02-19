@@ -123,6 +123,36 @@ class HomeController extends AbstractController
         return $this->redirectToRoute('home');
     }
     /**
+     * @Route("/retweet/{id}", name="retweet")
+     */
+    public function retweet($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+        $theTweet = $this->getDoctrine()->getRepository(Tweets::class)->find($id);
+        $theTweet->addRetweeter($user);
+        $em->persist($theTweet);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+    /**
+     * @Route("/deleteRetweet/{id}", name="deleteRetweet")
+     */
+    public function deleteRetweet($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+        $theTweet = $this->getDoctrine()->getRepository(Tweets::class)->find($id);
+        $theTweet->removeRetweeter($user);
+        $em->persist($theTweet);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+    /**
      * @Route("/dislike/{id}", name="dislikeTweet")
      */
     public function dislikeTweet($id)
